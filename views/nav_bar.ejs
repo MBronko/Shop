@@ -1,0 +1,8 @@
+<a href="/"><button>main page</button></a>
+<% if (session.logged) { %>
+    username: <%- session.username %>
+    <a href="/logout"><button>logout</button></a>
+<% } else {%>
+    <a href="/login"><button>login</button></a>
+    <a href="/register"><button>register</button></a>
+<% } %>

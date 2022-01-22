@@ -1,0 +1,12 @@
+<%- include('nav_bar') %>
+<br>
+<form action="/register" method="post" enctype="multipart/form-data">
+  <input type="text" name="username" placeholder="username">
+  <input type="text" name="password" placeholder="password">
+  <button type="submit">register</button>
+</form>
+<% if (err) { %>
+  <div><%- err %></div>
+<% } %>
+<br>
+register page
