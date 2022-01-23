@@ -1,12 +1,24 @@
 <%- include('nav_bar') %>
-<br>
-<form action="/login" method="post" enctype="multipart/form-data">
-  <input type="text" name="username" placeholder="username">
-  <input type="text" name="password" placeholder="password">
-  <button type="submit">login</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/style/login.css" rel="stylesheet" type="text/css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="lg">
+    <form id="login" action="/login" method="post" enctype="multipart/form-data">
+      <input type="text" name="username" placeholder="username">
+      <input type="text" name="password" placeholder="password">
+      <button type="submit">login</button>
+    </form>
+  </div>
+</body>
+</html>
 <% if (err) { %>
   <div><%- err %></div>
 <% } %>
-<br>
-login page
+<%- include('footer') %>

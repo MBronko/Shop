@@ -1,0 +1,46 @@
+@import 'style.css'; :root
+
+#header{
+    position: sticky;
+    top: 0;
+    padding: 1em;
+    background-color: var(--second_bg);
+}
+
+#logo{
+    font-size: var(--font_size_3);
+    float:left;
+    background-color: var(--second_bg);
+}
+
+#icons{
+    font-size: var(--font_size_3);
+    float:right;
+    background-color: var(--second_bg);
+}
+
+.fas{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+#clear{
+    clear: both;
+}
+#orders{
+    float:left;
+}
+#log_out{
+    float:right;
+}
+#history{
+    text-align: center;
+}
+
+#user_menu{
+    display:none;
+    padding: 0.7em;
+    background-color: var(--third_bg);
+    position: relative;
+    width: auto;
+}

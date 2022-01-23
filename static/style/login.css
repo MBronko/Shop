@@ -1,0 +1,13 @@
+@import "style.css";
+
+#lg{
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3em;
+}
+#login{
+    border: var(--third_bg) solid;
+    display: block;
+}

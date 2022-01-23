@@ -1,0 +1,6 @@
+@import 'style.css'; :root
+
+#search{
+    display:flex;
+    justify-content: center;
+}

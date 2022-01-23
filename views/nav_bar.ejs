@@ -1,8 +1,51 @@
-<a href="/"><button>main page</button></a>
-<% if (session.logged) { %>
-    username: <%- session.username %>
-    <a href="/logout"><button>logout</button></a>
-<% } else {%>
-    <a href="/login"><button>login</button></a>
-    <a href="/register"><button>register</button></a>
-<% } %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/b1c674bb0b.js" crossorigin="anonymous"></script>
+    <link href="../static/style/nav_bar.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+<div id="header">
+    <a id="logo" onclick="change_location('/')">
+        <i class="fas fa-paw"></i>
+        SHOP
+    </a>
+    <div id="icons">
+        <i class="fas fa-shopping-cart" onclick="change_location('/cart')"></i>
+        <i class="fas fa-user" onclick="user_menu()"></i>
+    </div>
+    <div id="clear"></div>
+</div>
+<div id="user_menu">
+    <% if (session.logged) { %>
+        username: <%- session.username %>
+        <a href="/logout"><button>logout</button></a>
+    <% } else {%>
+        <a href="/login"><button>login</button></a>
+        <a href="/register"><button>register</button></a>
+    <% } %>
+</div>
+<script>
+    var clicked = false;
+    function change_location(x){
+        console.log(x)
+        location = x;
+    }
+    function user_menu(){
+        if(clicked){
+            document.getElementById("user_menu").style.display = "none";
+            clicked = false;
+        }
+        else{
+            document.getElementById("user_menu").style.display = "inline";
+            clicked = true;
+        }
+    }
+</script>
+</body>
+</html>
