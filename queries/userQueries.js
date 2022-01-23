@@ -1,9 +1,10 @@
 const User = require('../models/userSchema');
 const userTools = require('../tools/userTools');
-const authTools = require('../tools/authTools');
 
 async function authenticateUser(username, password) {
-  return [true, '']; // todo
+  const user = await User.findOne({username: username});
+
+  return [await user.authenticatePassword(password), user];
 }
 
 async function registerUser(username, password) {
@@ -11,11 +12,14 @@ async function registerUser(username, password) {
     return [false, 'Username contains forbidden characters'];
   }
 
-  if (!userTools.validatePassword(username)) {
+  if (!userTools.validatePassword(password)) {
     return [false, 'Password doesnt meet requirements'];
   }
 
-  const user = new User({username: username, password: password, salt: authTools.randomSalt()});
+  const user = new User();
+
+  user.username = username;
+  await user.setPassword(password);
 
   try {
     await user.save();
