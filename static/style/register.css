@@ -11,12 +11,12 @@ input{
     width: 100%;
 }
 
-#log_in{
+#reg{
     padding-top: 10em;
     font-size: var(--font_size_3);
 }
 
-#login_submit{
+#register_submit{
     margin: 1em;
     padding: 0.5em 1.5em;
     font-size: var(--font_size_2);
@@ -25,32 +25,32 @@ input{
     border-radius: 10px;
 }
 
-#login_submit:hover{
+#register_submit:hover{
     color: var(--main_bg);
 }
 
-#to_register{
+#to_login{
     font-size: var(--font_size_2);
     color:white;
 }
 
-#to_register:hover{
+#to_login:hover{
     text-decoration: underline;
 }
 
-#lg{
+#rg{
     height: 100%;
     display:flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 3em;
 }
-#login{
+#register{
     text-align: center;
     height: max-content;
     width:30%;
     padding: 2em;
-    background-color: #dbab67;
+    background-color: var(--second_bg);
     border: var(--third_bg) solid;
     border-radius: 20px;
     display: block;

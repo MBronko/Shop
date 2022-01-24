@@ -1,13 +1,16 @@
 <%- include('nav_bar') %>
-<br>
-<form action="/register" method="post" enctype="multipart/form-data">
-  <input type="text" name="username" placeholder="username">
-  <input type="text" name="password" placeholder="password">
-  <button type="submit">register</button>
-</form>
+<script src="https://kit.fontawesome.com/b1c674bb0b.js" crossorigin="anonymous"></script>
+<link href="../static/style/register.css" rel="stylesheet" type="text/css">
+<div id="rg">
+  <form id="register" action="/register" method="post" enctype="multipart/form-data">
+    <label id="reg">Register to SHOP</label>
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="password" placeholder="password">
+    <button id="register_submit" type="submit">register</button><br>
+    <label id="to_login" onclick="location='/login'">If you already have account, click here to log in</label>
+  </form>
+</div>
 <% if (err) { %>
   <div><%- err %></div>
 <% } %>
-<br>
-register page
 <%- include('footer') %>

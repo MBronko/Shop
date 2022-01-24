@@ -27,20 +27,3 @@
 #clear{
     clear: both;
 }
-#orders{
-    float:left;
-}
-#log_out{
-    float:right;
-}
-#history{
-    text-align: center;
-}
-
-#user_menu{
-    display:none;
-    padding: 0.7em;
-    background-color: var(--third_bg);
-    position: relative;
-    width: auto;
-}
