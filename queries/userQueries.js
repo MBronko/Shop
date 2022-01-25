@@ -4,6 +4,10 @@ const userTools = require('../tools/userTools');
 async function authenticateUser(username, password) {
   const user = await User.findOne({username: username});
 
+  if (!user) {
+    return [false, null];
+  }
+
   return [await user.authenticatePassword(password), user];
 }
 
