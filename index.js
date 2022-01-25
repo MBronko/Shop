@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
 const userQueries = require('./queries/userQueries');
+const mw = require('./tools/middleware.js');
 
 const env = require('process').env;
 require('dotenv').config();
@@ -34,15 +35,11 @@ app.get('/', function(req, res) {
   res.render('main_page', {session: req.session});
 });
 
-app.get('/login', function(req, res) {
-  if (session.logged) {
-    res.redirect('/');
-  } else {
-    res.render('login', {session: req.session, err: false});
-  }
+app.get('/login', mw.loggedOut, function(req, res) {
+  res.render('login', {session: req.session, err: false});
 });
 
-app.post('/login', async function(req, res) {
+app.post('/login', mw.loggedOut, async function(req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -59,7 +56,7 @@ app.post('/login', async function(req, res) {
   }
 });
 
-app.get('/register', function(req, res) {
+app.get('/register', mw.loggedOut, function(req, res) {
   if (session.logged) {
     res.redirect('/');
   } else {
@@ -67,7 +64,7 @@ app.get('/register', function(req, res) {
   }
 });
 
-app.post('/register', async function(req, res) {
+app.post('/register', mw.loggedOut, async function(req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -80,7 +77,7 @@ app.post('/register', async function(req, res) {
   }
 });
 
-app.get('/logout', function(req, res) {
+app.get('/logout', mw.loggedIn, function(req, res) {
   req.session.destroy();
   res.redirect('/');
 });
