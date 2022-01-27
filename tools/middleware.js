@@ -1,3 +1,5 @@
+const User = require('../models/userSchema');
+
 function loggedIn(req, res, next) {
   if (req.session.logged) {
     return next();
@@ -12,9 +14,12 @@ function loggedOut(req, res, next) {
   res.redirect('/');
 }
 
-function isAdmin(req, res, next) {
-  if (req.session.is_admin) {
-    return next();
+async function isAdmin(req, res, next) {
+  if (req.session.logged) {
+    const user = await User.findOne({_id: req.session.userId});
+    if (user && user.isAdmin) {
+      return next();
+    }
   }
   res.redirect('/');
 }

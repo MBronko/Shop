@@ -21,6 +21,7 @@ async function addItem(itemData) {
   item.quantity = itemData.quantity;
 
   await item.save();
+  return item;
 }
 
 async function updateItem(itemData) {

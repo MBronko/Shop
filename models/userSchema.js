@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     message: 'Username is too short!',
   }},
   'password': String,
-  'is_admin': {type: Boolean, default: false},
+  'isAdmin': {type: Boolean, default: false},
 });
 
 userSchema.plugin(uniqueValidator);

@@ -3,6 +3,8 @@ const session = require('express-session');
 const multer = require('multer');
 const userQueries = require('./queries/userQueries');
 const itemRouter = require('./routers/itemRouter');
+const User = require('./models/userSchema');
+// const Order = require('./models/ordersSchema');
 const mw = require('./tools/middleware.js');
 
 const env = require('process').env;
@@ -18,7 +20,6 @@ mongoose.connect(uri, {
 const app = express();
 
 const upload = multer();
-app.use(upload.none());
 
 app.set('view engine', 'ejs');
 app.use('/static', express.static('static'));
@@ -40,7 +41,7 @@ app.get('/login', mw.loggedOut, function(req, res) {
   res.render('login', {session: req.session, err: false});
 });
 
-app.post('/login', mw.loggedOut, async function(req, res) {
+app.post('/login', mw.loggedOut, upload.none(), async function(req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -49,7 +50,7 @@ app.post('/login', mw.loggedOut, async function(req, res) {
   if (success) {
     req.session.logged = true;
     req.session.username = username;
-    req.session.is_admin = user.is_admin;
+    req.session.userId = user._id;
 
     res.redirect('/');
   } else {
@@ -65,7 +66,7 @@ app.get('/register', mw.loggedOut, function(req, res) {
   }
 });
 
-app.post('/register', mw.loggedOut, async function(req, res) {
+app.post('/register', mw.loggedOut, upload.none(), async function(req, res) {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -87,8 +88,17 @@ app.get('/cart', mw.loggedIn, function(req, res) {
   res.render('cart', {session: req.session}); // TODO
 });
 
-app.post('/cart', mw.loggedIn, function(req, res) {
+app.post('/cart', mw.loggedIn, upload.none(), function(req, res) {
   res.render('cart', {session: req.session}); // TODO
+});
+
+app.get('/admin', mw.isAdmin, async function(req, res) {
+  const users = await User.find();
+  const orders = []; // TODO after creating order schema
+
+  console.log(users);
+
+  res.render('admin_page', {session: req.session, users: users, orders: orders});
 });
 
 app.use('/item', itemRouter);
