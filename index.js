@@ -4,6 +4,7 @@ const multer = require('multer');
 const userQueries = require('./queries/userQueries');
 const itemRouter = require('./routers/itemRouter');
 const User = require('./models/userSchema');
+const Item = require('./models/itemSchema');
 // const Order = require('./models/ordersSchema');
 const mw = require('./tools/middleware.js');
 
@@ -33,8 +34,10 @@ app.use(session({
 }));
 
 
-app.get('/', function(req, res) {
-  res.render('main_page', {session: req.session});
+app.get('/', async function(req, res) {
+  const items = await Item.find();
+
+  res.render('main_page', {session: req.session, items: items});
 });
 
 app.get('/login', mw.loggedOut, function(req, res) {

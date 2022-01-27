@@ -14,6 +14,17 @@
         <i class="fas fa-search"></i>
     </div>
     <div id="list">
+        <% for(item of items) { %>
+        <a href="/item/<%= item._id %>">
+            <div>
+                <img src="/static/images/<%= item._id %><%= item.imgExt %> " alt="">
+                <div><%= item.name %> </div>
+                <div><%= item.description %> </div>
+                <div><%= item.price %> </div>
+                <div><%= item.quantity %> </div>
+            </div>
+        </a>
+        <% } %>
     </div>
     <div></div>
     <script type="text/javascript" src="home.js"> 
