@@ -6,6 +6,7 @@ const fs = require('fs');
 const mw = require('../tools/middleware');
 const Item = require('../models/itemSchema');
 const itemQueries = require('../queries/itemQueries');
+const {param} = require('express/lib/request');
 
 const itemRouter = express.Router();
 
@@ -39,11 +40,12 @@ itemRouter.get('/', function(req, res) {
 });
 
 itemRouter.get('/:id', async function(req, res) {
-  if (req.params.id) {
+  const itemId = req.params.id;
+  if (itemId) {
     try {
-      const item = await Item.findOne({_id: req.params.id});
+      const item = await Item.findOne({_id: itemId});
       if (item) {
-        return res.render('item', {session: req.session});
+        return res.render('item', {session: req.session, item: item});
       }
     } catch (err) {
       console.log(err);
@@ -54,14 +56,22 @@ itemRouter.get('/:id', async function(req, res) {
 });
 
 itemRouter.post('/', mw.isAdmin, uploadFile, async function(req, res) {
-  const params = req.body;
+  const params = {};
+  Object.assign(params, req.body);
+
   if (!params.name || !params.description || !params.price || !params.quantity || !req.file) {
+    if (req.file) {
+      await fs.promises.unlink(path.join(dest, req.file.filename));
+    }
     return res.redirect('/admin');
   }
 
+  const ext = path.extname(req.file.originalname);
+  params.imgExt = ext;
+
   const item = await itemQueries.addItem(params);
 
-  const newFilename = item._id + path.extname(req.file.originalname);
+  const newFilename = item._id + ext;
 
   const oldPath = path.join(dest, req.file.filename);
   const newPath = path.join(dest, newFilename);

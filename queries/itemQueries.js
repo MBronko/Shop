@@ -19,6 +19,7 @@ async function addItem(itemData) {
   item.description = itemData.description;
   item.price = itemData.price;
   item.quantity = itemData.quantity;
+  item.imgExt = itemData.imgExt;
 
   await item.save();
   return item;
@@ -35,6 +36,8 @@ async function updateItem(itemData) {
   item.description = itemData.description;
   item.price = itemData.price;
   item.quantity = itemData.quantity;
+  item.imgExt = itemData.imgExt;
+
   await item.save();
 }
 
