@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const multer = require('multer');
 const userQueries = require('./queries/userQueries');
+const itemRouter = require('./routers/itemRouter');
 const mw = require('./tools/middleware.js');
 
 const env = require('process').env;
@@ -82,6 +83,15 @@ app.get('/logout', mw.loggedIn, function(req, res) {
   res.redirect('/');
 });
 
+app.get('/cart', mw.loggedIn, function(req, res) {
+  res.render('cart', {session: req.session}); // TODO
+});
+
+app.post('/cart', mw.loggedIn, function(req, res) {
+  res.render('cart', {session: req.session}); // TODO
+});
+
+app.use('/item', itemRouter);
 
 app.listen(env.APP_PORT, function() {
   console.log('App running');
