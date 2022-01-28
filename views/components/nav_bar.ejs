@@ -5,6 +5,9 @@
         SHOP
     </a>
     <div id="icons">
+        <% if (session.isAdmin) { %>
+            <a href="/admin">admin</a>
+        <% } %>
         <% if (session.logged) { %>
             <i class="fas fa-shopping-cart" onclick="change_location('/cart')"></i>
             <i class="fas fa-sign-out-alt" onclick="change_location('/logout')"></i>

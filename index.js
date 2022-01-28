@@ -54,6 +54,7 @@ app.post('/login', mw.loggedOut, upload.none(), async function(req, res) {
     req.session.logged = true;
     req.session.username = username;
     req.session.userId = user._id;
+    req.session.isAdmin = user.isAdmin;
 
     res.redirect('/');
   } else {

@@ -6,7 +6,6 @@ const fs = require('fs');
 const mw = require('../tools/middleware');
 const Item = require('../models/itemSchema');
 const itemQueries = require('../queries/itemQueries');
-const {param} = require('express/lib/request');
 
 const itemRouter = express.Router();
 
@@ -81,12 +80,54 @@ itemRouter.post('/', mw.isAdmin, uploadFile, async function(req, res) {
   res.redirect(`/item/${item._id}`);
 });
 
-itemRouter.put('/:id', mw.isAdmin, uploadFile, function(req, res) {
-  res.render('item', {session: req.session, item: null}); // TODO
+itemRouter.post('/update/:id', mw.isAdmin, uploadFile, async function(req, res) {
+  try {
+    const item = await Item.findOne({_id: req.params.id});
+    if (item) {
+      if (req.file) {
+        const ext = path.extname(req.file.originalname);
+        const newFilePath = path.join(dest, req.file.filename);
+
+        const imgPath = path.join(dest, '' + item._id);
+
+        await fs.promises.unlink(imgPath + item.imgExt);
+        await fs.promises.rename(newFilePath, imgPath + ext);
+
+        item.imgExt = ext;
+      }
+
+      for (const key of ['name', 'description', 'price', 'quantity']) {
+        const val = req.body[key];
+        if (val) {
+          item[key] = req.body[key];
+        }
+      }
+
+      await item.save();
+
+      return res.redirect('/item/' + req.params.id);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+  res.redirect('/');
 });
 
-itemRouter.delete('/:id', mw.isAdmin, function(req, res) {
-  res.render('item', {session: req.session}); // TODO
+itemRouter.post('/delete/:id', mw.isAdmin, async function(req, res) {
+  const id = req.params.id;
+  try {
+    const item = await Item.findOne({_id: id});
+    if (item) {
+      const imgPath = path.join(dest, '' + item._id + item.imgExt);
+
+      await item.delete();
+      await fs.promises.unlink(imgPath);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+  res.redirect('/');
 });
 
 module.exports = itemRouter;
