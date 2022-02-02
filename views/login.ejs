@@ -8,9 +8,9 @@
       <input type="text" name="password" placeholder="password">
       <button id="login_submit" type="submit">log in</button><br>
       <label id="to_register" onclick="location='/register'">If you don't have account yet, click here to register</label>
+      <% if (err) { %>
+        <label><%- err %></label>
+      <% } %>
     </form>
   </div>
-<% if (err) { %>
-  <div><%- err %></div>
-<% } %>
 <%- include('components/footer') %>

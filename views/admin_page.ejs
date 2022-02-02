@@ -8,7 +8,8 @@
     <title>Home</title>
 </head>
 <body>
-  <%- include('components/nav_bar') %>
+  <div id="content">
+    <%- include('components/nav_bar') %>
   <div id="list">
     <% for(user of users) {%>
       <div id='test'><%- user.username %></div>
@@ -23,7 +24,7 @@
 
     <button id="submit" type="submit">upload</button><br>
   </form>
-
+  </div>
   <%- include('components/footer') %>
   <script type="text/javascript" src="home.js"></script>
 </body>

@@ -1,6 +1,60 @@
 @import 'style.css'; :root
 
+#content{
+    height: 100%;
+}
+
 #search{
     display:flex;
     justify-content: center;
+}
+
+#list{
+    padding: 1em 2em 1em 2em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#item_box{
+    background-color: var(--second_bg);
+    display:block;
+    width: 15em;
+    height: 20em;
+    border-radius: 1em;
+    margin : 1em;
+    border: solid var(--third_bg) 1px;
+}
+
+#item_image{
+    width: 15em;
+    height: 10em;
+    border-radius: 1em 1em 0 0;
+    border-bottom: solid var(--third_bg) 1px;
+}
+
+#item_data{
+    word-wrap: break-word;
+    margin: 0.5em;
+}
+
+#item_name{
+    text-transform: uppercase;
+    font-size: var(--font_size_2);
+    color: white;
+    font-weight:900;
+    overflow: hidden;
+    white-space:nowrap;
+}
+
+#item_quantity{
+    float: right;
+}
+
+#item_desc{
+    height: 6em;
+}
+
+#item_price{
+    font-weight:700;
+    float: left;
 }

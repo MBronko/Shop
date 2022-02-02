@@ -1,4 +1,3 @@
-<%- include('components/nav_bar') %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,26 +8,28 @@
     <title>Home</title>
 </head>
 <body>
+    <div id="content">
+    <%- include('components/nav_bar') %>
     <div id="search">
         <input id="input">
         <i class="fas fa-search"></i>
     </div>
     <div id="list">
         <% for(item of items) { %>
-        <a href="/item/<%= item._id %>">
-            <div>
-                <img src="/static/images/<%= item._id %><%= item.imgExt %> " alt="">
-                <div><%= item.name %> </div>
-                <div><%= item.description %> </div>
-                <div><%= item.price %> </div>
-                <div><%= item.quantity %> </div>
+        <div onclick="change_location('/item/<%= item._id %>')">
+            <div id = 'item_box'>
+                <img id = "item_image" src="/static/images/<%= item._id %><%= item.imgExt %> " alt="">
+                <div id="item_data">
+                <div id = "item_name"><%= item.name %> </div>
+                <div id="item_desc"><%= item.description %> </div>
+                <div id="item_price"><%= item.price %> PLN</div>
+                <div id="item_quantity">Qty: <%= item.quantity %> </div>
             </div>
-        </a>
+            </div>
+        </div>
         <% } %>
     </div>
-    <div></div>
-    <script type="text/javascript" src="home.js"> 
-    </script>
+    </div>
+    <%- include('components/footer') %>
 </body>
 </html>
-<%- include('components/footer') %>

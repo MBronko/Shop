@@ -8,7 +8,8 @@
       <title>Home</title>
   </head>
   <body>
-    <%- include('components/nav_bar') %>
+    <div id="content">
+      <%- include('components/nav_bar') %>
     <div id="list">
       <img src="/static/images/<%= item._id %><%= item.imgExt %> " alt="">
       <div><%= item.name %> </div>
@@ -32,7 +33,7 @@
       </form>
     <% } %>
 
-  
+    </div>
     <%- include('components/footer') %>
   </body>
   </html>
