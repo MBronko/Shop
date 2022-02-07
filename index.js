@@ -5,7 +5,6 @@ const userQueries = require('./queries/userQueries');
 const itemRouter = require('./routers/itemRouter');
 const User = require('./models/userSchema');
 const Item = require('./models/itemSchema');
-// const Order = require('./models/ordersSchema');
 const mw = require('./tools/middleware.js');
 
 const env = require('process').env;
@@ -63,11 +62,7 @@ app.post('/login', mw.loggedOut, upload.none(), async function(req, res) {
 });
 
 app.get('/register', mw.loggedOut, function(req, res) {
-  if (session.logged) {
-    res.redirect('/');
-  } else {
-    res.render('register', {session: req.session, err: false});
-  }
+  res.render('register', {session: req.session, err: false});
 });
 
 app.post('/register', mw.loggedOut, upload.none(), async function(req, res) {
@@ -89,20 +84,13 @@ app.get('/logout', mw.loggedIn, function(req, res) {
 });
 
 app.get('/cart', mw.loggedIn, function(req, res) {
-  res.render('cart', {session: req.session}); // TODO
-});
-
-app.post('/cart', mw.loggedIn, upload.none(), function(req, res) {
-  res.render('cart', {session: req.session}); // TODO
+  res.render('cart', {session: req.session});
 });
 
 app.get('/admin', mw.isAdmin, async function(req, res) {
   const users = await User.find();
-  const orders = []; // TODO after creating order schema
 
-  console.log(users);
-
-  res.render('admin_page', {session: req.session, users: users, orders: orders});
+  res.render('admin_page', {session: req.session, users: users});
 });
 
 app.use('/item', itemRouter);

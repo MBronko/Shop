@@ -10,7 +10,8 @@
   <body>
     <div id="content">
       <%- include('components/nav_bar') %>
-    <div id="list">
+    <div>
+    <!-- <div id="list"> -->
       <img src="/static/images/<%= item._id %><%= item.imgExt %> " alt="">
       <div><%= item.name %> </div>
       <div><%= item.description %> </div>
@@ -29,7 +30,7 @@
         <input type="number" name="quantity" placeholder="quantity">
         <input type="file" name="image" placeholder="image">
     
-        <button id="submit" type="submit">upload</button><br>
+        <button id="submit" type="submit">update</button><br>
       </form>
     <% } %>
 

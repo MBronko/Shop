@@ -10,11 +10,6 @@
 <body>
   <div id="content">
     <%- include('components/nav_bar') %>
-  <div id="list">
-    <% for(user of users) {%>
-      <div id='test'><%- user.username %></div>
-    <% } %>
-  </div>
   <form id="addItem" action="/item" method="post" enctype="multipart/form-data">
     <input type="text" name="name" placeholder="name">
     <input type="text" name="description" placeholder="description">
@@ -24,6 +19,15 @@
 
     <button id="submit" type="submit">upload</button><br>
   </form>
+
+  users:
+  <div>
+    <% for(user of users) {%>
+      <span><%- user.username %></span>
+      <span><%- user.isAdmin %></span><br>
+    <% } %>
+  </div>
+
   </div>
   <%- include('components/footer') %>
   <script type="text/javascript" src="home.js"></script>

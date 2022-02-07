@@ -5,7 +5,7 @@
     <form id="login" action="/login" method="post" enctype="multipart/form-data">
       <label id="log_in">Log in to SHOP</label>
       <input type="text" name="username" placeholder="username">
-      <input type="text" name="password" placeholder="password">
+      <input type="password" name="password" placeholder="password">
       <button id="login_submit" type="submit">log in</button><br>
       <label id="to_register" onclick="location='/register'">If you don't have account yet, click here to register</label>
       <% if (err) { %>
